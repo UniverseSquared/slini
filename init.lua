@@ -9,6 +9,8 @@ function slini.parse(data)
 	local out = {}
 	local section = nil
 	for line in data:gmatch("(.-)\n") do
+		-- Remove comments
+		line = line:gsub("%s*;.+", "")
 		if line ~= "" then
 			local s = line:match("^%[(.-)%]$")
 			if s ~= nil then
