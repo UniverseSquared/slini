@@ -19,7 +19,7 @@ function slini.parse(data)
 				section = s
 				out[section] = {}
 			else
-				local key, value = line:match("^(.-)%s+=%s+(.-)$")
+				local key, value = line:match("^(.-)%s*=%s*(.-)$")
 				local s = value:match("\"(.-)\"")
 				if s ~= nil then
 					value = s
