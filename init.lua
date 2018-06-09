@@ -24,6 +24,8 @@ function slini.parse(data)
 					value = true
 				elseif value == "false" or value == "no" then
 					value = false
+				elseif tonumber(value) ~= nil then
+					value = tonumber(value)
 				end
 				out[section][key] = value
 			end
