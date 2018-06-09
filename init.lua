@@ -38,6 +38,11 @@ function slini.serialize(data)
 	for section, d in pairs(data) do
 		out = out .. "[" .. section .. "]\n"
 		for key, value in pairs(d) do
+			if value == true then
+				value = "true"
+			elseif value == false then
+				value = "false"
+			end
 			out = out .. key .. "=" .. value .. "\n"
 		end
 	end
