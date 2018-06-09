@@ -20,12 +20,17 @@ function slini.parse(data)
 				out[section] = {}
 			else
 				local key, value = line:match("^(.-)=(.-)$")
-				if value == "true" or value == "yes" then
-					value = true
-				elseif value == "false" or value == "no" then
-					value = false
-				elseif tonumber(value) ~= nil then
-					value = tonumber(value)
+				local s = value:match("\"(.-)\"")
+				if s ~= nil then
+					value = s
+				else
+					if value == "true" or value == "yes" then
+						value = true
+					elseif value == "false" or value == "no" then
+						value = false
+					elseif tonumber(value) ~= nil then
+						value = tonumber(value)
+					end
 				end
 				out[section][key] = value
 			end
