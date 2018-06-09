@@ -37,9 +37,6 @@ function slini.serialize(data)
 		end
 	end
 	
-	if out:sub(-1) == "\n" then
-		out = out:sub(1, -2)
-	end
 	return out
 end
 
@@ -51,6 +48,16 @@ function slini.load(filePath)
 		local out = slini.parse(file:read("a"))
 		file:close()
 		return out
+	end
+end
+
+function slini.save(filePath, data)
+	if slini._LOVE2D then
+		love.filesystem.write(filePath, slini.serialize(data))
+	else
+		local file = io.open(filePath, "w")
+		file:write(slini.serialize(data))
+		file:close()
 	end
 end
 
