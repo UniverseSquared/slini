@@ -28,6 +28,21 @@ function slini.parse(data)
 	return out
 end
 
+function slini.serialize(data)
+	local out = ""
+	for section, d in pairs(data) do
+		out = out .. "[" .. section .. "]\n"
+		for key, value in pairs(d) do
+			out = out .. key .. "=" .. value .. "\n"
+		end
+	end
+	
+	if out:sub(-1) == "\n" then
+		out = out:sub(1, -2)
+	end
+	return out
+end
+
 function slini.load(filePath)
 	if slini._LOVE2D then
 		return slini.parse(love.filesystem.read(filePath))
