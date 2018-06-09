@@ -20,6 +20,11 @@ function slini.parse(data)
 				out[section] = {}
 			else
 				local key, value = line:match("^(.-)=(.-)$")
+				if value == "true" or value == "yes" then
+					value = true
+				elseif value == "false" or value == "no" then
+					value = false
+				end
 				out[section][key] = value
 			end
 		end
