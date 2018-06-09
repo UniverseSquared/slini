@@ -1,4 +1,6 @@
-local slini = {}
+local slini = {
+	_LOVE2D = love ~= nil
+}
 
 function slini.parse(data)
 	-- Add trailing \n
@@ -24,6 +26,17 @@ function slini.parse(data)
 	end
 
 	return out
+end
+
+function slini.load(filePath)
+	if slini._LOVE2D then
+		return slini.parse(love.filesystem.read(filePath))
+	else
+		local file = io.open(filePath, "r")
+		local out = slini.parse(file:read("a"))
+		file:close()
+		return out
+	end
 end
 
 return slini
